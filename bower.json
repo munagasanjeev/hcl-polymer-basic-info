@@ -1,0 +1,29 @@
+{
+  "name": "hcl-polymer-basic-info",
+  "version": "1.0.0",
+  "homepage": "https://github.com/munagasanjeev/hcl-polymer-basic-info",
+  "authors": [
+    "sanjeeva Kumar <munaga.sanjeev@gmail.com>"
+  ],
+  "description": "polymer basic details component",
+  "main": "",
+  "keywords": [
+    "{{site.project_title}}",
+    "web-components"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "^2.0.2",
+    "paper-input": "PolymerElements/paper-input#^2.0.1",
+    "paper-item": "PolymerElements/paper-item#^2.0.0",
+    "paper-listbox": "PolymerElements/paper-listbox#^2.0.0",
+    "paper-dropdown-menu": "PolymerElements/paper-dropdown-menu#^2.0.0"
+  }
+}

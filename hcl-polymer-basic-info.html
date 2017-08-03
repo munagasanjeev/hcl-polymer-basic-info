@@ -1,0 +1,109 @@
+<link rel="import" href="./paper-input/paper-input.html">
+<link rel="import" href="./paper-item/paper-item.html">
+<link rel="import" href="./paper-listbox/paper-listbox.html">
+<link rel="import" href="./paper-dropdown-menu/paper-dropdown-menu.html">
+
+<dom-module id="hcl-polymer-basic-info">
+ 
+    <template>
+        <style>
+            :host {
+                display: block
+            }
+            .reg-left{
+              width:100%;
+              float:left;              
+              min-height: 300px;              
+              padding:0 20px;
+              box-sizing: border-box;
+              } 
+
+        .reg-left paper-input,.reg-left paper-dropdown-menu{
+             width:48%;
+             float:left;
+             margin:0 1% 0 ; 
+           }
+</style>
+
+<div class="reg-left">
+    <section>
+      <paper-input name="FirstName" label="FirstName" id="FirstName" value="{{basicinfodetails.firstName::input}}"></paper-input>
+      <paper-input name="LastName" label="LastName" id="LastName" value="{{basicinfodetails.lastName::input}}"></paper-input>
+      <paper-dropdown-menu label="Gender" on-iron-select="_genderSelected" value="{{basicinfodetails.gender}}">
+          <paper-listbox slot="dropdown-content" >
+                <template is="dom-repeat" items="{{genderdetails}}"> 
+                    <paper-item value="item.name">{{item.name}}</paper-item>
+                </template>
+          </paper-listbox>
+        </paper-dropdown-menu>
+       <paper-input type="date" pattern="[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])" name="DOB" label="Date of Birth" id="DOB" value="{{basicinfodetails.dateofbirth}}"></paper-input>   
+        <paper-dropdown-menu label="HNIFlag" on-iron-select="_hiniSelected"  value="{{basicinfodetails.hniFlag}}">
+          <paper-listbox slot="dropdown-content">
+            <paper-item>Yes</paper-item>
+            <paper-item>No</paper-item>            
+          </paper-listbox>
+        </paper-dropdown-menu>
+        <paper-input name="reg-email" label="Email"  id="reg-Emailid" value={{basicinfodetails.emailid::input}}></paper-input>        
+        <paper-input name="password" label="Password" id="password" value={{basicinfodetails.password::input}}></paper-input>
+        <paper-input name="confirmpwd" label="Re-Enter Password" id="confirmpwd"></paper-input>
+        <paper-input name="reg-mobile" label="Mobile Number." id="reg-mobile" maxlength="10" value={{basicinfodetails.mobileNumber::input}}></paper-input>
+    </section>
+</div>
+
+    </template>
+
+    <script>
+        class HclPolymerBasicInfo extends Polymer.Element {
+
+            static get is() { return 'hcl-polymer-basic-info'; }
+
+            static get properties() {
+                return {
+                    basicinfodetails:{
+                        type:Object,
+                        value:{},
+                        notify:true,
+                        reflectToAttribute:true
+                    },
+                    genderdetails:{
+                        type:Array,
+                        value:[],
+                        reflectToAttribute:true
+                    }
+                };
+            }
+
+            constructor() {
+                super();
+            }
+
+            _genderSelected(e) {
+                var selectedItem = e.target.selectedItem;
+                if (selectedItem) {
+                this.basicinfodetails.gender = selectedItem.innerText;
+                // console.log("selected: " + selectedItem.innerText);
+                }
+            }
+
+            _hiniSelected(e) {
+                var selectedItem = e.target.selectedItem;
+                if (selectedItem.innerText == 'Yes') {
+                this.basicinfodetails.hniFlag = 'Y';
+                } else {
+                this.basicinfodetails.hniFlag = 'N';
+                }
+            }
+
+            ready() {
+                super.ready();
+
+                Polymer.RenderStatus.afterNextRender(this, function() {
+                    
+                });
+            }
+
+        }
+
+        window.customElements.define(HclPolymerBasicInfo.is, HclPolymerBasicInfo);
+    </script>
+</dom-module>
